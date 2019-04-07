@@ -1,0 +1,134 @@
+{
+  "classes": [
+    {
+      "summary": "Software Design",
+      "location":"D3.07",
+      "start": {
+        "dateTime":"2019-04-01T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-01T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Requirement Engineering",
+      "location":"C7.06",
+      "start": {
+        "dateTime":"2019-04-01T12:30:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-01T14:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Practical"
+    },
+    {
+      "summary": "Community Service Initiative",
+      "location":"LT5",
+      "start": {
+        "dateTime":"2019-04-02T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-02T11:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Theory of Computation",
+      "location":"D4.05",
+      "start": {
+        "dateTime":"2019-04-02T12:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-02T14:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Requirement Engineering",
+      "location":"D4.04",
+      "start": {
+        "dateTime":"2019-04-02T14:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-02T15:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Software Engineering Capstone Project I",
+      "location":"LT5",
+      "start": {
+        "dateTime":"2019-04-03T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-03T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Software Design",
+      "location":"E7.02",
+      "start": {
+        "dateTime":"2019-04-03T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-03T11:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Requirement Engineering",
+      "location":"D3.08",
+      "start": {
+        "dateTime":"2019-04-03T12:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-03T14:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Theory of Computation",
+      "location":"LT5",
+      "start": {
+        "dateTime":"2019-04-04T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-04T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Software Design",
+      "location":"C7.05",
+      "start": {
+        "dateTime":"2019-04-04T14:30:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-04T16:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Practical"
+    }
+  ]
+}

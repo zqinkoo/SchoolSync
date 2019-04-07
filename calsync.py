@@ -3,41 +3,53 @@
 from __future__ import print_function #run on py 2 & 3
 import datetime
 import pickle
+import json
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 SCOPES = ['https://www.googleapis.com/auth/calendar']
-GMT_OFF = '+08:00'
-EVENT = {
-    'summary':'TEST',
-    'start': {'dateTime': '2019-04-01T19:00:00%s' % GMT_OFF},
-    'end': {'dateTime': '2019-04-01T22:00:00%s' % GMT_OFF}
-}
-CALID = "k26iavm5k4vpfieeg0ne8937us@group.calendar.google.com"
+GMT_OFF = 'Asia/Kuala_Lumpur'
+CALID = "k26iavm5k4vpfieeg0ne8937us@group.calendar.google.com" #Taylor's Calendar ID
 
 def main():
     service = auth()
+    #addEv(service)
+    delAllEv(service)
 
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                        maxResults=10, singleEvents=True,
-                                        orderBy='startTime').execute()
-    events = events_result.get('items', [])
+def addEv(service):
+    f = open("eveId.txt", "a+")
+    with open("localization.json","r") as schedfile:
+        schedule = json.load(schedfile)
 
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
+    for c in schedule['classes']:
+        curdict = {
+            'summary':c['summary'],
+            'location':c['location'],
+            'description':c['description'],
+            'start': {
+                'dateTime':str(c['start']['dateTime']),
+                'timeZone': GMT_OFF,
+            },
+            'end': {
+                'dateTime':str(c['end']['dateTime']),
+                'timeZone': GMT_OFF,
+            }
+        }
+        print(curdict['end'])
+        e = service.events().insert(calendarId=CALID,
+            sendNotifications=False, body=curdict).execute()
+        f.write(e.get('id') + '\n')
 
-    e = service.events().insert(calendarId=CALID,
-        sendNotifications=False, body=EVENT).execute()
-
-    print(e)
-
+def delAllEv(service):
+    with open("eveId.txt", "r") as fileHandler:
+        line = fileHandler.readline()
+        while line:
+            print(line.strip())
+            service.events().delete(calendarId=CALID, eventId=line.strip()).execute()
+            line = fileHandler.readline()
+    open("eveId.txt","rw")
 
 def auth():
     creds = None
