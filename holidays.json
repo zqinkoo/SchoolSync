@@ -1,0 +1,28 @@
+{
+  "holidays": [
+    {
+      "name": "Labour Day",
+      "date":"2019-05-01"
+    },
+    {
+      "name": "Wesak Day",
+      "date":"2019-05-19"
+    },
+    {
+      "name": "Nuzul Quran",
+      "date":"2019-05-22"
+    },
+    {
+      "name": "Hari Raya",
+      "date":"2019-06-05"
+    },
+    {
+      "name": "Hari Raya",
+      "date":"2019-06-06"
+    },
+    {
+      "name": "Hari Raya Aidiladha",
+      "date":"2019-08-11"
+    }
+  ]
+}
