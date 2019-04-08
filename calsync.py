@@ -2,6 +2,7 @@
 
 from __future__ import print_function #run on py 2 & 3
 import datetime
+import time
 import pickle
 import json
 import os
@@ -19,6 +20,7 @@ WEEK_COUNT = 14
 STORE_FILE = "eveId.txt"
 SCHEDULE_JSON = "localization.json"
 HOLIDAYS_JSON = 'holidays.json'
+EXCLUDE_WEEK = 7
 
 def main():
     try:
@@ -37,7 +39,6 @@ def main():
                 print("Existing schedule has already been loaded.")
                 sys.exit(2)
             else:
-                print("Adding classes to " + CALID)
                 addClasses(service)
         elif opt in ('-d', '--delete'):
             if os.path.isfile(STORE_FILE):
@@ -52,9 +53,11 @@ def printHelp():
     print("Hi just chillin here")
 
 def addClasses(service):
+    print("Process started at {0}".format(datetime.datetime.now().strftime("%X")))
+    print("Adding classes to " + CALID)
+    start = time.time()
+
     weekCount = 0
-
-
     with open(SCHEDULE_JSON,"r") as schedfile:
         schedule = json.load(schedfile)
 
@@ -63,7 +66,7 @@ def addClasses(service):
         offset = 7 * weekCount
 
         #if got week break put here
-        if weekCount == 6:
+        if weekCount == (EXCLUDE_WEEK-1):
             weekCount += 1
             print("###### cuti #####")
             continue
@@ -83,13 +86,14 @@ def addClasses(service):
 
         weekCount += 1
 
+    end = time.time()
+    print("Completed at {0}. Time elapsed {1}s".format(datetime.datetime.now().strftime("%X"), (end-start)))
 
 def addToCal(today, c, service):
     #here u can check specific days -- holiday or not to exclude
     if holiday(today):
         print(str(today.strftime("%a")) + ", " + str(today) + " --Holiday")
     if not holiday(today):
-        print(str(today.strftime("%a")) + ", " + str(today) + " --Class")
         # print("Old time" + str(item['start']['dateTime']))
         # print("new time" + newDate(item['start']['dateTime'], today))
         curdict = {
@@ -108,6 +112,7 @@ def addToCal(today, c, service):
         }
         e = service.events().insert(calendarId=CALID,
             sendNotifications=False, body=curdict).execute()
+        print(str(today.strftime("%a")) + ", " + str(today) + " --Class | Event created (evId) > " + (e.get('id')))
         with open(STORE_FILE, "a+") as f:
             f.write(e.get('id') + '\n')
 
@@ -126,13 +131,19 @@ def holiday(today):
         return False
 
 def delAllEv(service):
+    print("Process started at {0}".format(datetime.datetime.now().strftime("%X")))
+    start = time.time()
+
     with open(STORE_FILE, "r") as fileHandler:
         line = fileHandler.readline()
         while line:
-            print(line.strip())
             service.events().delete(calendarId=CALID, eventId=line.strip()).execute()
+            print(line.strip() + " deleted")
             line = fileHandler.readline()
     os.remove(STORE_FILE)
+
+    end = time.time()
+    print("Completed at {0}. Time elapsed {1}s".format(datetime.datetime.now().strftime("%X"), (end-start)))
 
 def dtConvert(dateTime):
     year = int(dateTime[0:4])
