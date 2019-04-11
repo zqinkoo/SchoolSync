@@ -17,48 +17,71 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 GMT_OFF = 'Asia/Kuala_Lumpur'
 CALID = "k26iavm5k4vpfieeg0ne8937us@group.calendar.google.com" #Taylor's Calendar ID
 WEEK_COUNT = 14
-STORE_FILE = "eveId.txt"
-SCHEDULE_JSON = "localization.json"
-HOLIDAYS_JSON = 'holidays.json'
+SE_JSON = 'lib/se.json'
+CS_JSON = 'lib/cs.json'
+HOLIDAYS_JSON = 'lib/holidays.json'
 EXCLUDE_WEEK = 7
 
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'adc:h', ['add', 'delete', 'calId=','help'])
-    except getopt.GetoptError:
-        usage()
+        opts, args = getopt.getopt(sys.argv[1:], 'u:c:s:ad', ['user=', 'calendar=', 'study=', 'add', 'delete'])
+    except getopt.GetoptError as err:
+        print(err)
         sys.exit(2)
 
+    cal = None
+    study = None
+    user = None
+
     service = auth() #Authorize so that the script can write to your account
-    for opt, arg in opts:
-        if opt in ('-h', '--help'):
-            printHelp()
-            sys.exit(2)
-        elif opt in ('-a', '--add'):
-            if os.path.isfile(STORE_FILE):
-                print("Existing schedule has already been loaded.")
-                sys.exit(2)
-            else:
-                addClasses(service)
-        elif opt in ('-d', '--delete'):
-            if os.path.isfile(STORE_FILE):
-                delAllEv(service)
-            else:
-                print("No event (event IDs) exists to delete")
-                sys.exit(2)
-        else:
-            sys.exit(2)
+    try:
+        for opt, arg in opts:
+            if opt in ('-u', '--user'):
+                if arg == "def":
+                    user = "aqlan"
+                elif arg:
+                    user = arg
 
-def printHelp():
-    print("Hi just chillin here")
+            elif opt in ('-c', '--calendar'):
+                if arg == "def":
+                    cal = CALID
+                elif arg:
+                    cal = arg
 
-def addClasses(service):
+            elif opt in ('-s', '--study'):
+                if arg == "cs":
+                    study = CS_JSON
+                if arg == "se":
+                    study = SE_JSON
+
+            elif opt in ('-a', '--add'):
+                if os.path.isfile(str(user+".txt")):
+                    print("Existing schedule has already been loaded.")
+                    sys.exit(2)
+                else:
+                    print("add passed")
+                    print(user + cal, study)
+                    addClasses(service, user, study, cal)
+
+            elif opt in ('-d', '--delete'):
+                f = str("lib/"+user+".txt")
+                if os.path.isfile(f):
+                    delAllEv(service, f, cal)
+                else:
+                    print("No event (event IDs) exists to delete")
+                    sys.exit(2)
+    except:
+        notEnoughArg()
+        sys.exit(2)
+
+def addClasses(service, user, study, calendar):
+    user = str("lib/" + user + ".txt")
     print("Process started at {0}".format(datetime.datetime.now().strftime("%X")))
     print("Adding classes to " + CALID)
     start = time.time()
 
     weekCount = 0
-    with open(SCHEDULE_JSON,"r") as schedfile:
+    with open(study,"r") as schedfile:
         schedule = json.load(schedfile)
 
     while weekCount < WEEK_COUNT:
@@ -77,10 +100,10 @@ def addClasses(service):
             #rDay is referenced day, to differentiate today and tomorrow in the context of first week
             tDay = dtConvert(str(c['start']['dateTime']))
             if tDay == rDay:
-                addToCal(rDay + datetime.timedelta(days=offset), c, service)
+                addToCal(rDay + datetime.timedelta(days=offset), c, service, calendar, user)
             elif tDay > rDay:
                 rDay = tDay
-                addToCal(rDay + datetime.timedelta(days=offset), c, service)
+                addToCal(rDay + datetime.timedelta(days=offset), c, service, calendar, user)
             elif tDay < rDay:
                 print("Next week")
 
@@ -89,7 +112,7 @@ def addClasses(service):
     end = time.time()
     print("Completed at {0}. Time elapsed {1}s".format(datetime.datetime.now().strftime("%X"), (end-start)))
 
-def addToCal(today, c, service):
+def addToCal(today, c, service, calendar, user):
     #here u can check specific days -- holiday or not to exclude
     if holiday(today):
         print(str(today.strftime("%a")) + ", " + str(today) + " --Holiday")
@@ -110,15 +133,11 @@ def addToCal(today, c, service):
                 'timeZone': GMT_OFF,
             }
         }
-        e = service.events().insert(calendarId=CALID,
+        e = service.events().insert(calendarId=calendar,
             sendNotifications=False, body=curdict).execute()
         print(str(today.strftime("%a")) + ", " + str(today) + " --Class | Event created (evId) > " + (e.get('id')))
-        with open(STORE_FILE, "a+") as f:
+        with open(user, "a+") as f:
             f.write(e.get('id') + '\n')
-
-def newDate(old, new):
-    time = str(old[10:])
-    return str(new)+time
 
 def holiday(today):
     with open(HOLIDAYS_JSON,"r") as datelist:
@@ -130,26 +149,35 @@ def holiday(today):
     else:
         return False
 
-def delAllEv(service):
+def delAllEv(service, user, calendar):
+
     print("Process started at {0}".format(datetime.datetime.now().strftime("%X")))
     start = time.time()
 
-    with open(STORE_FILE, "r") as fileHandler:
+    with open(user, "r") as fileHandler:
         line = fileHandler.readline()
         while line:
-            service.events().delete(calendarId=CALID, eventId=line.strip()).execute()
+            service.events().delete(calendarId=calendar, eventId=line.strip()).execute()
             print(line.strip() + " deleted")
             line = fileHandler.readline()
-    os.remove(STORE_FILE)
+    os.remove(user)
 
     end = time.time()
     print("Completed at {0}. Time elapsed {1}s".format(datetime.datetime.now().strftime("%X"), (end-start)))
+
+def newDate(old, new):
+    time = str(old[10:])
+    return str(new)+time
 
 def dtConvert(dateTime):
     year = int(dateTime[0:4])
     month = int(dateTime[5:7])
     day = int(dateTime[8:10])
     return datetime.datetime(year, month, day).date()
+
+def notEnoughArg():
+    print("usage: ./calsync.py -u [user] -c [calendar id] -s [class(se/cs)] -a|-d")
+    sys.exit(2)
 
 def auth():
     creds = None
