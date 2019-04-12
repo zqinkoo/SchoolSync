@@ -85,7 +85,7 @@ def addClasses(service, user, study, calendar):
         schedule = json.load(schedfile)
 
     while weekCount < WEEK_COUNT:
-        print("Week %d", (weekCount+1))
+        print("Week ", (weekCount+1))
         offset = 7 * weekCount
 
         #if got week break put here
