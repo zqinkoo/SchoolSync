@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+#VS Code commit test
 
 from __future__ import print_function #run on py 2 & 3
 import datetime
@@ -23,6 +24,7 @@ HOLIDAYS_JSON = 'lib/holidays.json'
 EXCLUDE_WEEK = 7
 
 def main():
+
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'u:c:s:ad', ['user=', 'calendar=', 'study=', 'add', 'delete'])
     except getopt.GetoptError as err:
