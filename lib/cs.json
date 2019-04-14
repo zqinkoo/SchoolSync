@@ -1,0 +1,147 @@
+{
+  "classes": [
+    {
+      "summary": "Computer and Network Security",
+      "location":"C7.05",
+      "start": {
+        "dateTime":"2019-04-01T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-01T12:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Practical"
+    },
+    {
+      "summary": "Community Service Initiative",
+      "location":"LT5",
+      "start": {
+        "dateTime":"2019-04-02T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-02T11:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Computer and Network Security",
+      "location":"C7.05",
+      "start": {
+        "dateTime":"2019-04-02T14:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-02T16:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Mobile Applications Development",
+      "location":"LT7",
+      "start": {
+        "dateTime":"2019-04-02T16:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-02T18:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Computer Science Capstone Project I",
+      "location":"LT5",
+      "start": {
+        "dateTime":"2019-04-03T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-03T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Mobile Applications Development",
+      "location":"C7.06",
+      "start": {
+        "dateTime":"2019-04-03T14:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-03T15:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    },
+    {
+      "summary": "Theory of Computation",
+      "location":"LT5",
+      "start": {
+        "dateTime":"2019-04-04T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-04T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Computer and Network Security",
+      "location":"LT8",
+      "start": {
+        "dateTime":"2019-04-04T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-04T11:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Technopreneurship",
+      "location":"C8.09",
+      "start": {
+        "dateTime":"2019-04-04T12:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-04T13:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Lecture"
+    },
+    {
+      "summary": "Mobile Applications Development",
+      "location":"C7.06",
+      "start": {
+        "dateTime":"2019-04-04T16:30:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-04T18:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Practical"
+    },
+    {
+      "summary": "Theory of Computation",
+      "location":"D4.08",
+      "start": {
+        "dateTime":"2019-04-05T08:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "end": {
+        "dateTime":"2019-04-05T10:00:00+08:00",
+        "timeZone":"Asia/Kuala_Lumpur"
+      },
+      "description": "Tutorial"
+    }
+  ]
+}
