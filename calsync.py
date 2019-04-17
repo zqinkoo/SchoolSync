@@ -24,7 +24,7 @@ HOLIDAYS_JSON = 'lib/holidays.json'
 EXCLUDE_WEEK = 7
 
 def main():
-
+    msg = "Hello"
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'u:c:s:ad', ['user=', 'calendar=', 'study=', 'add', 'delete'])
     except getopt.GetoptError as err:
